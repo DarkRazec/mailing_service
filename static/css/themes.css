@@ -1,0 +1,39 @@
+[data-bs-theme=dark] {
+    --bs-body-bg: #0e0e10;
+    .card-header {
+        background-color: rgb(207 213 243 / 15%);
+    }
+    .card {
+        background-color: #1c1c1c;
+        border: 1px solid #333;
+    }
+    .form-control {
+        background-color: #2f2f31;
+    }
+    .form-select {
+        background-color: #2f2f31;
+    }
+    tbody, td, tfoot, th, tr {
+        background-color: rgba(0, 0, 0, 0.125);
+    }
+    .table a:hover {
+        color: #dbdbdb;
+        background-color: transparent;
+        text-decoration: none;
+    }
+}
+
+[data-bs-theme=light] {
+    .card {
+        .card-header {
+            background-color: #26262f;
+            color: #fffffff5;
+        }
+    }
+    }
+    .table a:hover {
+        color: #ff0000e0;
+        background-color: transparent;
+        text-decoration: none;
+    }
+}
