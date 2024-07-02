@@ -1,0 +1,82 @@
+.navbar-toggler{
+    background-color: #4a2489;
+    padding: 4px;
+    margin-left: 10px;
+    z-index: 1100;
+}
+
+#darkmodecontainer{
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    place-items: center;
+}
+
+.btn-menu {
+    background-color: #361769;
+    width: 13rem;
+    padding: 6px 3px 6px 4px;
+    margin: 0.7rem 5px 5px 10px;
+    color: #e9e9e9db;
+    border-radius: 0.6rem;
+    transition: 0.3s;
+    --bs-btn-active-bg: #8c28bfcc;
+}
+
+.btn-menu:hover {
+    background-color: #591a83;
+    color: white;
+}
+
+#lollol {
+    background-color: #591a83;
+    color: white;
+    width: 13rem;
+    margin: 0.7rem 5px 5px;
+    text-align: center;
+}
+
+#lollol .dropdown-item:focus, #lollol .dropdown-item:hover {
+    background-color: #8327b3;
+    color: white;
+}
+
+.offcanvas {
+    background-color: rgb(33,37,41,1);
+    color: white;
+}
+
+.offcanvas.offcanvas-start {
+    width: 280px;
+    border: 1px solid #333;
+}
+
+.offcanvas .text {
+    font-size: 16px;
+    font-weight: bold;
+    font-style: oblique;
+}
+.form-switch .form-check-input {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.75%29'/%3e%3c/svg%3e");
+    cursor: pointer;
+    border-color: rgb(0,0,0,0.3);
+    box-shadow: None;
+    width: 40px;
+    height: 20px;
+}
+
+.form-check {
+    margin-bottom: 0rem;
+}
+
+.form-switch .form-check-input:focus {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.75%29'/%3e%3c/svg%3e");
+    transition: 0.3s;
+}
+
+.form-switch .form-check-input:checked {
+    background-position: right center;
+    background-color: #13131cab;
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    transition: 0.3s;
+}

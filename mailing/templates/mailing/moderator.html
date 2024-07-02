@@ -1,0 +1,89 @@
+{% extends 'mailing/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<main class="row">
+    <p class="d-grid gap-3">
+        <button type="button" class="w-90 btn btn-menu" data-bs-toggle="collapse"
+                data-bs-target="#multiCollapseExample1" aria-expanded="false"
+                aria-controls="multiCollapseExample1">Рассылки
+        </button>
+    </p>
+    <div class="row">
+        <div class="collapse multi-collapse col" id="multiCollapseExample1">
+            <div class="card mb-4 rounded-3 shadow-sm d-flex justify-content-center">
+                <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table class="table table-hover text-center">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Заголовок сообщения</th>
+                            <th scope="col">Автор</th>
+                            <th scope="col">Активность</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for form in formset %}
+                        <tr>
+                            <td>{{ form.instance.pk }}</td>
+                            <td>{{ form.instance.message.title }}</td>
+                            <td>{{ form.instance.user }}</td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    {{ form|crispy }}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <p class="d-grid gap-3">
+        <button type="button" class="w-90 btn btn-menu" data-bs-toggle="collapse"
+                data-bs-target="#multiCollapseExample2" aria-expanded="false"
+                aria-controls="multiCollapseExample2">Пользователи
+        </button>
+    </p>
+    <div class="row">
+        <div class="row">
+            <div class="collapse multi-collapse col" id="multiCollapseExample2">
+                <div class="card mb-4 rounded-3 shadow-sm d-flex justify-content-center">
+                    <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <table class="table table-hover text-center">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Заголовок сообщения</th>
+                                <th scope="col">Автор</th>
+                                <th scope="col">Активность</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for form in formset %}
+                            <tr>
+                                <td>{{ form.instance.pk }}</td>
+                                <td>{{ form.instance.message.title }}</td>
+                                <td>{{ form.instance.user }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        {{ form|crispy }}
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+{% load static %}
+{% load cache %}
+{% cache 3600 client_list %}
+<main class="row">
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">email</th>
+                <th scope="col">ФИО</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% endcache %}
+            {% for object in object_list %}
+            {% cache timeout clients object.id %}
+            <tr>
+                <td>{{ object.pk }}</td>
+                <td><a href="{% url 'mailing:client_detail' object.pk %}">{{ object.mail }}</a></td>
+                <td>{{ object.last_name }} {{ object.first_name }} {{ object.middle_name }}</td>
+            </tr>
+            {% endcache %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

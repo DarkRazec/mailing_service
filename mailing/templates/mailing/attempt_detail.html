@@ -1,0 +1,31 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+{% load cache %}
+{% cache 60 attempt object.pk %}
+<head>
+    <title>{{ title }}</title>
+</head>
+<main class="row" style="width: auto;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="card" style="border-color: transparent;">
+                <div class="card-header">
+                    <h3>{{ object.mailing.message.title }}</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"> Статус: {{ object.status }}</p>
+                    <p class="card-text"> Ответ сервера: {{ object.response }}</p>
+                    <p class="card-text"> Дата отправки: {{ object.date_time }}</p>
+                </div>
+                <div class="row">
+                    <div class="btn-group">
+                        <a href="{% url 'mailing:attempts' %}" class="btn btn-primary px-md-4"><- Назад</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endcache %}
+{% endblock %}
