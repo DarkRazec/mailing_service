@@ -1,0 +1,50 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+{% load cache %}
+{% cache timeout post object.pk %}
+<head>
+    <title>{{ title }} ({{ object.slug }})</title>
+</head>
+<main class="row" style="width: auto;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="card" style="border-color: transparent;">
+                <div class="card-header">
+                    <h3>({{ object.slug }})</h3>
+                </div>
+                <div class="card-body">
+                    <img src="{{ object.image|media_filter }}" class="image" alt="...">
+                    <p class="card-text"> Описание: {{ object.desc }}</p>
+                    <p class="card-text"> Кол-во просмотров: {{ object.view_count }}</p>
+                    <p class="card-text"> Дата создания: {{ object.created_at }}</p>
+                    <p class="card-text"> Дата изменения: {{ object.updated_at }}</p>
+                    <p class="card-text"> Автор: {{ object.user }}</p>
+                    {% endcache %}
+                    {% if perms.post.set_active %}
+                    {% if object.is_published %}
+                    <a href="{% url 'blog:activity' object.pk %}" class="btn btn-warning px-md-4">Снять активность</a>
+                    {% else %}
+                    <a href="{% url 'blog:activity' object.pk %}" class="btn btn-success px-md-4">Проставить активность
+                    </a>
+                    {% endif %}
+                    {% endif %}
+                    <hr>
+                    <div class="row">
+                        <div class="btn-group">
+                            <a href="{% url 'blog:view' %}" class="btn btn-primary px-md-4"><- Назад</a>
+                            {% if perms.post.change_post or user == object.user %}
+                            <a href="{% url 'blog:update' object.pk %}" class="btn btn-success px-md-4">Изменить</a>
+                            {% endif %}
+                            {% if perms.post.delete_post or user == object.user %}
+                            <a href="{% url 'blog:delete' object.pk %}" class="btn btn-danger px-md-4">Удалить X</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

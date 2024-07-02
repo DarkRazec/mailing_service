@@ -1,0 +1,50 @@
+{% with url_name=request.resolver_match.url_name %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/menu.css' %}?<?=filemtime('css/menu.css');?>">
+<header class="navbar">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+        Меню
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</header>
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvas"
+     aria-labelledby="offcanvasScrollingLabel">
+    {% load cache %}
+    {% cache 60 inc_menu user.id %}
+    <div class="offcanvas-header mb-3"></div>
+    <div class="offcanvas-body mt-3">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item"><a href="{% url 'mailing:homepage' %}" class="btn btn-menu">Главная</a></li>
+            <li class="nav-item"><a href="{% url 'mailing:mailings' %}" class="btn btn-menu">Рассылки</a></li>
+            <li class="nav-item"><a href="{% url 'mailing:messages' %}" class="btn btn-menu">Письма</a></li>
+            <li class="nav-item"><a href="{% url 'mailing:clients' %}" class="btn btn-menu">Клиенты</a></li>
+            <li class="nav-item"><a href="{% url 'mailing:attempts' %}" class="btn btn-menu">Логи</a></li>
+            <li class="nav-item"><a href="{% url 'blog:view' %}" class="btn btn-menu">Блог</a></li>
+            <li>
+                <div class="dropdown mt-3">
+                    <a class="btn btn-menu dropdown-toggle" type="button" data-bs-toggle="dropdown">+ Создать</a>
+                    <ul class="dropdown-menu" id="lollol">
+                        <li><a href="{% url 'mailing:mailing_create' %}" class="dropdown-item">Создать рассылку</a></li>
+                        <li><a href="{% url 'mailing:message_create' %}" class="dropdown-item">Создать письмо</a></li>
+                        <li><a href="{% url 'mailing:client_create' %}" class="dropdown-item">Создать клиента</a></li>
+                        <li><a href='{% url "blog:create" %}' class="dropdown-item">Создать пост</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="container" id="darkmodecontainer">
+        <div class="text">Тёмная тема</div>
+        <label class="form-check form-switch form-check-reverse">
+            <input class="form-check-input" type="checkbox" role="switch" id="darkModeSwitch">
+        </label>
+    </div>
+    {% endcache %}
+    <hr style="margin: 8px 0px;">
+    <div>
+        {% include 'users/includes/inc_profile.html' %}
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/inc_menu.js' %}"></script>
+{% endwith %}

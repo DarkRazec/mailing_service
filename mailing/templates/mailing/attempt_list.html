@@ -1,0 +1,32 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+{% load static %}
+<main class="row">
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Рассылка</th>
+                <th scope="col">Статус</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% load cache %}
+                {% cache 60 attempts %}
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.pk }}</td>
+                    <td>{{ object.mailing }}</td>
+                    <td>{{ object.status }}</td>
+                    <td><a href="{% url 'mailing:attempt_detail' object.pk %}">посмотреть</a></td>
+                </tr>
+                {% endfor %}
+                {% endcache %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock %}

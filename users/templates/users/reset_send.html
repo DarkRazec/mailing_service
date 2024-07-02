@@ -1,0 +1,12 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<div class="container" style="width:50%">
+    <div class="row text-center">
+        <div class="mb-3">
+            <h2>Новый пароль был отправлен на ваш адрес электронной почты</h2>
+        </div>
+        <a href="{% url 'users:login' %}" class="btn btn-primary px-md-4">Вернуться ко входу</a>
+    </div>
+</div>
+{% endblock %}

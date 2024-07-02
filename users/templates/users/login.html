@@ -1,0 +1,21 @@
+{% extends 'mailing/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container" style="width:50%">
+    <div class="row text-center">
+        <div class="card" style="border: none;">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div>
+                        <button type="submit" class="btn btn-success">Войти</button>
+                        <a href="{% url 'users:password_recovery' %}">Забыли пароль?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

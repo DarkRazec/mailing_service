@@ -1,0 +1,40 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+{% load cache %}
+{% cache 60 client object.pk %}
+<head>
+    <title>{{ title }}</title>
+</head>
+<main class="row" style="width: auto;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="card" style="border-color: transparent;">
+                <div class="card-header">
+                    <h3>{{ object.mail }}</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"> ФИО: {{ object.last_name }} {{ object.first_name }} {{ object.middle_name }}</p>
+                    {% if object.comment %}
+                    <p class="card-text"> Комментарий: {{ object.comment }}</p>
+                    {% endif %}
+                </div>
+                <div class="row">
+                    <div class="btn-group">
+                        <a href="{% url 'mailing:homepage' %}" class="btn btn-primary px-md-4"><- Назад</a>
+                        {% if perms.mailing.change_client%}
+                        <a href="{% url 'mailing:client_update' object.pk %}" class="btn btn-success px-md-4">Изменить
+                        </a>
+                        {% endif %}
+                        {% if perms.mailing.delete_client%}
+                        <a href="{% url 'mailing:client_delete' object.pk %}" class="btn btn-danger px-md-4">Удалить X
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endcache %}
+{% endblock %}

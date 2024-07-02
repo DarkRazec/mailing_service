@@ -1,0 +1,38 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+{% load cache %}
+{% cache timeout message object.id %}
+<head>
+    <title>{{ title }}</title>
+</head>
+<main class="row" style="width: auto;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="card" style="border-color: transparent;">
+                <div class="card-header">
+                    <h3>{{ object.title }}</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"> Сообщение: {{ object.body }}</p>
+                    <p class="card-text"> Автор: {{ object.user }}</p>
+                </div>
+                <div class="row">
+                    <div class="btn-group">
+                        <a href="{% url 'mailing:messages' %}" class="btn btn-primary px-md-4"><- Назад</a>
+                        {% if perms.mailing.change_message or user == object.user %}
+                        <a href="{% url 'mailing:message_update' object.pk %}" class="btn btn-success px-md-4">Изменить
+                        </a>
+                        {% endif %}
+                        {% if perms.mailing.delete_message %}
+                        <a href="{% url 'mailing:message_delete' object.pk %}" class="btn btn-danger px-md-4">Удалить X
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endcache %}
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+
+<head>
+    <title>{{ title }}</title>
+</head>
+<main class="row" style="width: auto;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="card" style="border-color: transparent;">
+                <div class="card-header">
+                    <h3>({{ object.message.title }})</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"> Сообщение: {{ object.message.body }}</p>
+                    <p class="card-text"> Статус: {{ object.status }}</p>
+                    <p class="card-text"> Автор: {{ object.user }}</p>
+                    <p class="card-text"> Дата отправки: {{ object.date_time }}</p>
+                </div>
+                <div class="row">
+                    <div class="btn-group">
+                        <a href="{% url 'mailing:mailings' %}" class="btn btn-primary px-md-4"><- Назад</a>
+                        {% if perms.mailing.change_mailing or user == object.user %}
+                        <a href="{% url 'mailing:mailing_update' object.pk %}" class="btn btn-success px-md-4">Изменить
+                        </a>
+                        {% endif %}
+                        {% if perms.mailing.set_active %}
+                        {% if object.is_active %}
+                        <a href="{% url 'mailing:mailing_activity' object.pk %}" class="btn btn-warning px-md-4">Блокировать
+                            рассылку</a>
+                        {% else %}
+                        <a href="{% url 'mailing:mailing_activity' object.pk %}" class="btn btn-success px-md-4">Разблокировать
+                            рассылку</a>
+                        {% endif %}
+                        {% if object.user.is_active %}
+                        <a href="{% url 'mailing:user_activity' object.pk %}" class="btn btn-warning px-md-4">Блокировать
+                            пользователя</a>
+                        {% else %}
+                        <a href="{% url 'mailing:user_activity' object.pk %}" class="btn btn-success px-md-4">Разблокировать
+                            пользователя</a>
+                        {% endif %}
+                        {% endif %}
+                        {% if perms.mailing.delete_mailing %}
+                        <a href="{% url 'mailing:mailing_delete' object.pk %}" class="btn btn-danger px-md-4">Удалить X
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
