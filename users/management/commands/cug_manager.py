@@ -18,4 +18,3 @@ class Command(BaseCommand):
             print('Группа создана')
         else:
             print('Группа уже существует')
-            print(Permission.objects.filter(content_type=ContentType.objects.get_for_model(Post)))

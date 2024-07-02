@@ -1,7 +1,8 @@
 {% extends 'mailing/base.html' %}
 
 {% block content %}
-
+{% load cache %}
+{% cache timeout mailing object.id %}
 <head>
     <title>{{ title }}</title>
 </head>
@@ -25,6 +26,11 @@
                         <a href="{% url 'mailing:mailing_update' object.pk %}" class="btn btn-success px-md-4">Изменить
                         </a>
                         {% endif %}
+                        {% if perms.mailing.delete_mailing %}
+                        <a href="{% url 'mailing:mailing_delete' object.pk %}" class="btn btn-danger px-md-4">Удалить X
+                        </a>
+                        {% endif %}
+                        {% endcache %}
                         {% if perms.mailing.set_active %}
                         {% if object.is_active %}
                         <a href="{% url 'mailing:mailing_activity' object.pk %}" class="btn btn-warning px-md-4">Блокировать
@@ -40,10 +46,6 @@
                         <a href="{% url 'mailing:user_activity' object.pk %}" class="btn btn-success px-md-4">Разблокировать
                             пользователя</a>
                         {% endif %}
-                        {% endif %}
-                        {% if perms.mailing.delete_mailing %}
-                        <a href="{% url 'mailing:mailing_delete' object.pk %}" class="btn btn-danger px-md-4">Удалить X
-                        </a>
                         {% endif %}
                     </div>
                 </div>
