@@ -1,7 +1,6 @@
 import datetime
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 from django import forms
 
 from mailing.models import Mailing, Message, Client
