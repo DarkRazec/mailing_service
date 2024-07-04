@@ -9,7 +9,6 @@ from blog.models import Post
 from mailing.forms import MailingForm, MessageForm, ClientForm
 from mailing.models import Mailing, Message, Client, AttemptLogs
 from mailing.services import clear_cache, count_unique_clients
-from users.models import User
 
 
 def mailing_activity(request, pk):

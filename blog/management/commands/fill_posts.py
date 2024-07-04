@@ -3,7 +3,6 @@ import json
 from django.core.management import BaseCommand
 
 from blog.models import Post
-from mailing.models import Mailing, Message, Client
 from users.models import User
 
 
